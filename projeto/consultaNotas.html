@@ -1,0 +1,94 @@
+<script>
+    let aluno = [];
+    let numeroAlunos = 0;
+    let nomeAlunos = 0;
+    let colunaNotas = 0;
+
+    function criarMatrizAluno() {
+        numeroAlunos = Number(prompt('Entre com os números dos alunos'));
+
+        for (let linha = 0; linha < numeroAlunos; linha++) {
+            aluno[linha] = [];
+            for (let coluna = 0; coluna < 4; coluna++) {
+                aluno[linha][coluna] = '';
+            }
+
+        }
+
+        for (nomeAlunos = 0; nomeAlunos < numeroAlunos; nomeAlunos++) {
+            aluno[nomeAlunos][0] = prompt('Entre com nomes para os alunos');
+
+            for (colunaNotas = 1; colunaNotas < 4; colunaNotas++) {
+                let notas = Number(prompt('Entre com as notas'));
+
+                if (notas >= 0 && notas <= 10) {
+                    aluno[nomeAlunos][colunaNotas] = notas;
+
+                } else {
+                    console.log('Nota Inválida por favor inserir notas acima de 0 e abaixo de 10');
+                }
+
+            }
+        }
+
+        return aluno;
+    }
+
+    function mediaAluno() {
+        let mediaCada = [];
+
+        for (nomeAlunos = 0; nomeAlunos < numeroAlunos; nomeAlunos++) {
+            let somaCada = 0;
+
+            for (colunaNotas = 1; colunaNotas < 4; colunaNotas++) {
+                somaCada += aluno[nomeAlunos][colunaNotas];
+            }
+
+            mediaCada[nomeAlunos] = (somaCada / 3);
+
+            if (mediaCada[nomeAlunos] > 6) {
+                console.log(`Aluno ${aluno[nomeAlunos][0]} aprovado com média ${mediaCada[nomeAlunos].toFixed(1)}`);
+            } else if (mediaCada[nomeAlunos] == 6) {
+                console.log(`Aluno ${aluno[nomeAlunos][0]} aprovado na média com média ${mediaCada[nomeAlunos].toFixed(1)}`);
+            } else {
+                console.log(`Aluno ${aluno[nomeAlunos][0]} reprovado com média ${mediaCada[nomeAlunos].toFixed(1)}`);
+            }
+        }
+    }
+
+    function mediaTurma() {
+        let soma = 0;
+        let media = 0;
+
+        for (nomeAlunos = 0; nomeAlunos < numeroAlunos; nomeAlunos++) {
+            for (colunaNotas = 1; colunaNotas < 4; colunaNotas++) {
+                soma += aluno[nomeAlunos][colunaNotas];
+            }
+        }
+
+        media = (soma / 3);
+
+        mediaDividida = (media / 3);
+
+        console.log('A média da turma foi: ' + '' + mediaDividida.toFixed(1));
+    }
+
+    function exibirMatriz() {
+        let matrizExibida = '';
+
+        for (let contador = 0; contador < aluno.length; contador++) {
+            matrizExibida += aluno[contador].join('--') + '\n'
+        }
+
+        console.log(matrizExibida);
+    }
+
+    do {
+        criarMatrizAluno();
+        exibirMatriz();
+        mediaAluno();
+        mediaTurma();
+
+        var resposta = prompt('Insira sua resposta: ');
+    } while (resposta != 'Não');
+</script>
